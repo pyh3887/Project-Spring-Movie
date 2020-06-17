@@ -5,6 +5,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.fileupload.UploadContext;
 import org.apache.ibatis.annotations.Param;
@@ -88,7 +91,7 @@ public class MovieMangerController {
 	
 	// 영화 추가 메소드
 	@RequestMapping(value = "movieinsert", method = RequestMethod.POST)
-	public String insertProcess(MovieBean bean, BindingResult result ) { //movie bean 에는 업로드 파일이 image setter로 들어오게됌  
+	public String insertProcess(MovieBean bean, BindingResult result ,HttpServletRequest request) { //movie bean 에는 업로드 파일이 image setter로 들어오게됌  
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
 	
@@ -105,8 +108,10 @@ public class MovieMangerController {
 		}
 		try {
 			inputStream = file.getInputStream();
-
-			File newFile = new File("../project5\\src\\main\\webapp\\resources\\images\\" + fileName); //파일업로드 주소 작성
+			String root_path = request.getSession().getServletContext().getRealPath("/");			
+		
+			File newFile = new File(root_path + "resources/images/" + fileName); //파일업로드 주소 작성
+			//file.transferTo(newFile);
 			if (!newFile.exists()) {
 				newFile.createNewFile();
 			}
@@ -161,7 +166,7 @@ public class MovieMangerController {
 	
 	//영화 수정하기(영화 추가와 동일하다)
 	@RequestMapping(value = "movieupdate", method = RequestMethod.POST)
-	public String updateProcess(MovieBean bean, BindingResult result ) {
+	public String updateProcess(MovieBean bean, BindingResult result, HttpServletRequest request ) {
 		String a = bean.getCommon();
 		System.out.println(a);
 		InputStream inputStream = null;
@@ -181,7 +186,9 @@ public class MovieMangerController {
 		try {
 			inputStream = file.getInputStream();
 
-			File newFile = new File("../project5/src/main/webapp/resources/images/" + fileName);
+			String root_path = request.getSession().getServletContext().getRealPath("/");			
+			
+			File newFile = new File(root_path + "resources/images/" + fileName); //파일업로드 주소 작성
 			if (!newFile.exists()) {
 				newFile.createNewFile();
 			}

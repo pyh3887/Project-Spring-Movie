@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class UploadController {
 
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
 	public String filesubmit(@ModelAttribute("uploadFile") UploadFile uploadFile, BindingResult result,
-			UploadProfileBean bean,HttpSession session
+			UploadProfileBean bean,HttpSession session,HttpServletRequest request
 			) {
 		
 		session.removeAttribute("image");
@@ -63,10 +64,10 @@ public class UploadController {
 		}
 		try {
 			inputStream = file.getInputStream();
-
-			File newFile = new File(
-					"\\work\\jsou\\project5\\src\\main\\webapp\\resources\\gogek\\"
-							+ fileName);
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			
+			
+			File newFile = new File(root_path + "resources/gogek/" + fileName); //파일업로드 주소 작성
 			if (!newFile.exists()) {
 				newFile.createNewFile();
 			}

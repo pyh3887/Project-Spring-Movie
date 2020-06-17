@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -90,7 +92,7 @@ public class TVMangerController {
 		
 	//tv 자료 추가하기	
 	@RequestMapping(value = "tvinsert", method = RequestMethod.POST)
-	public String insertProcess(pack.admin.controller.TvBean bean, BindingResult result ) {
+	public String insertProcess(pack.admin.controller.TvBean bean, BindingResult result, HttpServletRequest request ) {
 		//tv bean 에는 업로드 파일이 image setter로 들어오게됌
 		
 		System.out.println("dasdfasdfasdfadsf");
@@ -113,7 +115,10 @@ public class TVMangerController {
 		try {
 			inputStream = file.getInputStream();
 
-			File newFile = new File("../project5/src/main/webapp/resources/images/" + fileName); //파일업로드 주소 작성
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			
+			
+			File newFile = new File(root_path + "resources/images/" + fileName); //파일업로드 주소 작성
 			if (!newFile.exists()) {
 				newFile.createNewFile();
 			}
@@ -162,7 +167,7 @@ public class TVMangerController {
 	
 	//추가 자료 수정하기 (추가 와 동일)
 	@RequestMapping(value = "tvupdate", method = RequestMethod.POST)
-	public String updateProcess(pack.admin.controller.TvBean bean, BindingResult result ) {
+	public String updateProcess(pack.admin.controller.TvBean bean, BindingResult result  ,HttpServletRequest request) {
 	
 		System.out.println(bean.getImage());
 		System.out.println(bean.getName());
@@ -183,7 +188,10 @@ public class TVMangerController {
 		try {
 			inputStream = file.getInputStream();
 
-			File newFile = new File("../project5/src/main/webapp/resources/images/" + fileName);
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			
+			
+			File newFile = new File(root_path + "resources/images/" + fileName); //파일업로드 주소 작성
 			if (!newFile.exists()) {
 				newFile.createNewFile();
 			}

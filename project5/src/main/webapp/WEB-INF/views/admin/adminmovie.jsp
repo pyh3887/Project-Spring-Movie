@@ -247,7 +247,7 @@
             		<!-- 영화리스트 출력 -->
                 <td>${list.no }</td>
                 <th><img alt="" src="resources/images/${list.image }" style="width: 100px;height: 100px;"></th>
-                <th>${list.name },${list.image }</th>
+                <th>${list.name }</th>
                 <td>
                 	<!-- 영화 평점 매기기 -->
                 
