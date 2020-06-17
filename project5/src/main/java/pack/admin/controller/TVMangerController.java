@@ -113,7 +113,7 @@ public class TVMangerController {
 		try {
 			inputStream = file.getInputStream();
 
-			File newFile = new File("\\webapp\\resources\\images\\" + fileName); //파일업로드 주소 작성
+			File newFile = new File("../project5/src/main/webapp/resources/images/" + fileName); //파일업로드 주소 작성
 			if (!newFile.exists()) {
 				newFile.createNewFile();
 			}
@@ -183,7 +183,7 @@ public class TVMangerController {
 		try {
 			inputStream = file.getInputStream();
 
-			File newFile = new File("\\webapp\\resources\\images\\" + fileName);
+			File newFile = new File("../project5/src/main/webapp/resources/images/" + fileName);
 			if (!newFile.exists()) {
 				newFile.createNewFile();
 			}
