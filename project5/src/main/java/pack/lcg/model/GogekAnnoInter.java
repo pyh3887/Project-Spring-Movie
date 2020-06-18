@@ -86,7 +86,7 @@ public interface GogekAnnoInter {
 		
 	
 		
-		@Insert("insert into team.gogek (gogek_id,gogek_passwd,gogek_passwd1, gogek_name,gogek_email,gogek_date) values (#{gogek_id}, '123','123','동동이',#{gogek_email},now())")
+		@Insert("insert into team.gogek (gogek_id,gogek_passwd,gogek_passwd1, gogek_name,gogek_email,gogek_date,gogek_image) values (#{gogek_id}, '123','123','동동이',#{gogek_email},now(),'유저.png')")
 		public boolean insertDataNaver(GogekBean bean);
 		
 		@Select("select * from gogek where gogek_id = #{gogek_id}")

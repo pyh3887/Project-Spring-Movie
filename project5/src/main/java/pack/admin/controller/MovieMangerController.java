@@ -108,7 +108,7 @@ public class MovieMangerController {
 		}
 		try {
 			inputStream = file.getInputStream();
-			String root_path = request.getSession().getServletContext().getRealPath("/");			
+			String root_path = request.getSession().getServletContext().getRealPath("/"); // # HttpServletRequest 를 통해 절대경로를 생성 및	
 		
 			File newFile = new File(root_path + "resources/images/" + fileName); //파일업로드 주소 작성
 			//file.transferTo(newFile);
